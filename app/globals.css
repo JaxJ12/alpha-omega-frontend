@@ -2,68 +2,191 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   DESIGN TOKEN SYSTEM — 3 Layers (primitive → semantic → component)
+   Alpha & Omega Agency
+   ============================================================ */
 
 :root {
-  --navy:     #0B2545;
-  --navy-mid: #143A6B;
-  --gold:     #C9963A;
-  --gold-lt:  #E8B86D;
-  --cream:    #F8F5F0;
-  --white:    #FFFFFF;
-  --text:     #1A1A2E;
-  --muted:    #6B7280;
-  --border:   #E5E1DA;
+  /* --- LAYER 1: PRIMITIVE TOKENS --- */
+  --c-navy-950: #071830;
+  --c-navy-900: #0A1F38;
+  --c-navy-800: #0D2545;
+  --c-navy-700: #143A6B;
+  --c-gold-600: #A8771E;
+  --c-gold-500: #C9963A;
+  --c-gold-400: #DDB060;
+  --c-gold-300: #EDD090;
+  --c-green-800: #134D38;
+  --c-green-700: #1A6B52;
+  --c-green-600: #1E7A5F;
+  --c-cream-50:  #FAF7F2;
+  --c-cream-100: #F2ECE3;
+  --c-cream-200: #E5DDD1;
+  --c-white:     #FFFFFF;
+  --c-gray-900:  #111827;
+  --c-gray-700:  #374151;
+  --c-gray-500:  #6B7280;
+  --c-gray-400:  #9CA3AF;
+  --c-gray-300:  #D1D5DB;
+  --c-gray-100:  #F3F4F6;
+  --c-red-500:   #EF4444;
+  --c-green-500: #22C55E;
+
+  /* --- LAYER 2: SEMANTIC TOKENS --- */
+  --color-primary:       var(--c-navy-800);
+  --color-primary-dark:  var(--c-navy-900);
+  --color-primary-deep:  var(--c-navy-950);
+  --color-accent:        var(--c-gold-500);
+  --color-accent-light:  var(--c-gold-400);
+  --color-accent-dark:   var(--c-gold-600);
+  --color-cta:           var(--c-green-700);
+  --color-cta-dark:      var(--c-green-800);
+  --color-bg:            var(--c-cream-50);
+  --color-bg-alt:        var(--c-white);
+  --color-bg-dark:       var(--c-navy-800);
+  --color-bg-deeper:     var(--c-navy-950);
+  --color-text:          var(--c-gray-900);
+  --color-text-secondary:var(--c-gray-700);
+  --color-text-muted:    var(--c-gray-500);
+  --color-text-on-dark:  rgba(255,255,255,0.90);
+  --color-text-muted-dk: rgba(255,255,255,0.55);
+  --color-border:        var(--c-cream-200);
+  --color-border-light:  var(--c-cream-100);
+
+  /* --- TYPOGRAPHY TOKENS --- */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:    'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --lh-display:   1.12;
+  --lh-body:      1.72;
+
+  /* --- SPACING TOKENS (8dp base) --- */
+  --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px;
+  --sp-4: 16px; --sp-5: 20px;  --sp-6: 24px;
+  --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+  --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+  --sp-32: 128px;
+
+  /* --- LAYER 3: COMPONENT TOKENS --- */
+  --radius-xs:  6px;
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+  --radius-pill:100px;
+  --shadow-xs:  0 1px 6px rgba(10,31,56,0.06);
+  --shadow-sm:  0 2px 14px rgba(10,31,56,0.08);
+  --shadow-md:  0 6px 28px rgba(10,31,56,0.11);
+  --shadow-lg:  0 16px 56px rgba(10,31,56,0.15);
+  --shadow-xl:  0 28px 80px rgba(10,31,56,0.20);
+  --shadow-gold:0 8px 36px rgba(201,150,58,0.32);
+  --nav-height: 72px;
+  --max-width:  1200px;
+  --content-w:  720px;
+
+  /* Button component tokens */
+  --btn-h:      50px;
+  --btn-px:     28px;
+  --btn-radius: var(--radius-sm);
+  --btn-font:   var(--font-body);
+  --btn-fw:     700;
+  --btn-sz:     15px;
+
+  /* Card component tokens */
+  --card-bg:    var(--color-bg-alt);
+  --card-radius:var(--radius-md);
+  --card-shadow:var(--shadow-sm);
+  --card-border:1px solid var(--color-border);
+  --card-p:     var(--sp-8);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background-color: var(--cream);
-  color: var(--text);
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 17px;
+  line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
+  line-height: var(--lh-display);
+  color: var(--color-text);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--font-body); }
+img { max-width: 100%; display: block; }
+*, *::before, *::after { box-sizing: border-box; }
 
-button {
-  cursor: pointer;
-}
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-.fade-up {
-  animation: fadeUp 0.65s ease forwards;
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.fade-up-1 { animation: fadeUp 0.65s 0.05s ease both; }
-.fade-up-2 { animation: fadeUp 0.65s 0.15s ease both; }
-.fade-up-3 { animation: fadeUp 0.65s 0.25s ease both; }
-.fade-up-4 { animation: fadeUp 0.65s 0.35s ease both; }
-.fade-up-5 { animation: fadeUp 0.65s 0.45s ease both; }
+.anim-1 { animation: fadeUp 0.65s 0.05s ease both; }
+.anim-2 { animation: fadeUp 0.65s 0.15s ease both; }
+.anim-3 { animation: fadeUp 0.65s 0.25s ease both; }
+.anim-4 { animation: fadeUp 0.65s 0.35s ease both; }
+.anim-5 { animation: fadeUp 0.65s 0.45s ease both; }
+.anim-6 { animation: fadeUp 0.65s 0.55s ease both; }
 
-.gold-line {
-  display: inline-block;
-  position: relative;
+/* ============================================================
+   ACCORDION
+   ============================================================ */
+
+.accordion-body {
+  overflow: hidden;
+  animation: fadeUp 0.28s ease both;
 }
-.gold-line::after {
-  content: '';
-  position: absolute;
-  left: 0; bottom: -3px;
-  width: 100%; height: 3px;
-  background: linear-gradient(90deg, #C9963A, #E8B86D);
-  border-radius: 2px;
+
+/* ============================================================
+   SECTION UTILITY
+   ============================================================ */
+
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
 }
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--sp-3);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--c-cream-50); }
+::-webkit-scrollbar-thumb { background: var(--c-cream-200); border-radius: 3px; }
