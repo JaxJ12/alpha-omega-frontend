@@ -1,0 +1,18 @@
+﻿# Dependencies
+node_modules/
+.npm
+.eslintcache
+
+# Production
+.next/
+out/
+build/
+dist/
+
+# Misc
+.DS_Store
+*.pem
+
+# Environment variables
+.env.local
+.env.*.local
