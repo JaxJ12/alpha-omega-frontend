@@ -2,12 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+
+:root {
+  --navy:     #0B2545;
+  --navy-mid: #143A6B;
+  --gold:     #C9963A;
+  --gold-lt:  #E8B86D;
+  --cream:    #F8F5F0;
+  --white:    #FFFFFF;
+  --text:     #1A1A2E;
+  --muted:    #6B7280;
+  --border:   #E5E1DA;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--cream);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
 }
 
 a {
@@ -17,4 +38,32 @@ a {
 
 button {
   cursor: pointer;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.65s ease forwards;
+}
+
+.fade-up-1 { animation: fadeUp 0.65s 0.05s ease both; }
+.fade-up-2 { animation: fadeUp 0.65s 0.15s ease both; }
+.fade-up-3 { animation: fadeUp 0.65s 0.25s ease both; }
+.fade-up-4 { animation: fadeUp 0.65s 0.35s ease both; }
+.fade-up-5 { animation: fadeUp 0.65s 0.45s ease both; }
+
+.gold-line {
+  display: inline-block;
+  position: relative;
+}
+.gold-line::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, #C9963A, #E8B86D);
+  border-radius: 2px;
 }
